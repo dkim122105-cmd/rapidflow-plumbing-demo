@@ -1,0 +1,4 @@
+# Only the static site needs to deploy — exclude the video tooling + artifacts
+_demo-video/
+*.mp4
+README.md

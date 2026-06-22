@@ -1,0 +1,10 @@
+# Video tooling — keep the recorder source, drop the heavy/generated bits
+_demo-video/node_modules/
+_demo-video/out/
+*.mp4
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RapidFlow Plumbing — Fast, licensed plumbers in Brisbane</title>
+<meta name="description" content="Burst pipe, blocked drain or no hot water? RapidFlow Plumbing turns up fast across Brisbane. Licensed, insured, upfront fixed pricing. 24/7 emergency callouts." />
+
+<!-- Favicon: water drop -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3C16 3 6 14 6 21a10 10 0 0 0 20 0C26 14 16 3 16 3Z' fill='%2318B6CC'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:   '#08182A',
+          navy:  { DEFAULT: '#0E2A47', 700: '#15395C' },
+          aqua:  { DEFAULT: '#18B6CC', light: '#5FD6E6' },
+          amber: { DEFAULT: '#F7A50A', 600: '#E08C00' },
+          paper: '#F4F8FB',
+          slate: '#51677E',
+          line:  '#DCE6EF',
+        },
+        fontFamily: {
+          display: ['Archivo', 'system-ui', 'sans-serif'],
+          sans:    ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        },
+        fontWeight: {
+          400: '400', 500: '500', 600: '600', 700: '700', 800: '800', 900: '900',
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(8,24,42,.06), 0 14px 34px -14px rgba(8,24,42,.20)',
+          lift: '0 10px 28px -10px rgba(24,182,204,.45)',
+        },
+        maxWidth: { content: '74rem' },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  .font-display { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .eyebrow { font-family: 'Archivo', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+
+  /* Hero atmosphere: cool water glow over deep navy */
+  .hero-bg {
+    background:
+      radial-gradient(120% 90% at 85% -10%, rgba(24,182,204,.28), transparent 55%),
+      radial-gradient(90% 80% at 0% 0%, rgba(95,214,230,.10), transparent 50%),
+      linear-gradient(180deg, #0B2238 0%, #08182A 100%);
+  }
+  .pipe-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(80% 70% at 70% 20%, #000 30%, transparent 75%);
+  }
+
+  /* Signature: live on-call pulse */
+  .live-dot { position: relative; }
+  .live-dot::after {
+    content: ''; position: absolute; inset: -5px; border-radius: 9999px;
+    background: #34D399; opacity: .55; animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+  }
+  @keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+
+  .underline-aqua { background: linear-gradient(transparent 62%, rgba(24,182,204,.35) 62%); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid #5FD6E6; outline-offset: 2px; border-radius: 6px;
+  }
+
+  /* ---- Motion system — curves & stagger from Patterns/styles/luxury/motion.css ---- */
+  :root { --ease-out: cubic-bezier(.16,1,.3,1); --ease-springy: cubic-bezier(.34,1.56,.64,1); }
+
+  /* Anchor offset so smooth-scroll targets clear the sticky header */
+  [id] { scroll-margin-top: 88px; }
+
+  /* Progressive disclosure — reveal on scroll (purposeful, not decorative) */
+  [data-reveal] { opacity: 0; transform: translateY(26px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); will-change: opacity, transform; }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  [data-reveal-stagger] > * { opacity: 0; transform: translateY(22px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+  [data-reveal-stagger].is-visible > * { opacity: 1; transform: none; }
+  [data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+  [data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 90ms; }
+  [data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 180ms; }
+  [data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 270ms; }
+  [data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 360ms; }
+  [data-reveal-stagger].is-visible > *:nth-child(6) { transition-delay: 450ms; }
+
+  /* Micro-interaction — card lift on hover */
+  .lift { transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .4s var(--ease-out); }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 52px -22px rgba(8,24,42,.34); border-color: rgba(24,182,204,.45); }
+
+  /* Micro-interaction — animated nav underline */
+  .navlink { position: relative; }
+  .navlink::after { content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 100%;
+    background: #18B6CC; transform: scaleX(0); transform-origin: left;
+    transition: transform .35s var(--ease-out); }
+  .navlink:hover::after { transform: scaleX(1); }
+
+  /* Micro-interaction — CTA press feedback */
+  a[href^="tel:"], button[type="submit"], a[href="#quote"] {
+    transition: background-color .25s var(--ease-out), transform .2s var(--ease-out), box-shadow .25s var(--ease-out); }
+  a[href^="tel:"]:hover, button[type="submit"]:hover, a[href="#quote"]:hover { transform: translateY(-2px); }
+  a[href^="tel:"]:active, button[type="submit"]:active, a[href="#quote"]:active { transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .live-dot::after { animation: none; }
+    *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    [data-reveal], [data-reveal-stagger] > * { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+<noscript><style>[data-reveal],[data-reveal-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-40 border-b border-white/10 bg-ink/85 backdrop-blur">
+  <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3.5">
+    <a href="#top" class="flex items-center gap-2.5 text-white">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-aqua/15 ring-1 ring-aqua/30">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 text-aqua" fill="currentColor" aria-hidden="true"><path d="M12 2.2S5 9.6 5 14.4a7 7 0 0 0 14 0C19 9.6 12 2.2 12 2.2Z"/></svg>
+      </span>
+      <span class="font-display text-lg font-800 tracking-tight">RapidFlow<span class="text-aqua">.</span></span>
+    </a>
+
+    <nav class="hidden items-center gap-8 text-sm font-600 text-white/75 md:flex" aria-label="Primary">
+      <a href="#services" class="navlink transition hover:text-white">Services</a>
+      <a href="#how" class="navlink transition hover:text-white">How it works</a>
+      <a href="#reviews" class="navlink transition hover:text-white">Reviews</a>
+      <a href="#areas" class="navlink transition hover:text-white">Areas</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="tel:+61731850420" class="hidden items-center gap-2 rounded-full bg-amber px-4 py-2 text-sm font-700 text-ink shadow-sm transition hover:bg-amber-600 sm:inline-flex">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        (07) 3185 0420
+      </a>
+      <button id="menuBtn" class="grid h-10 w-10 place-items-center rounded-lg text-white ring-1 ring-white/15 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden border-t border-white/10 bg-ink md:hidden">
+    <nav class="mx-auto flex max-w-content flex-col px-5 py-3 text-white" aria-label="Mobile">
+      <a href="#services" class="border-b border-white/5 py-3 font-600">Services</a>
+      <a href="#how" class="border-b border-white/5 py-3 font-600">How it works</a>
+      <a href="#reviews" class="border-b border-white/5 py-3 font-600">Reviews</a>
+      <a href="#areas" class="py-3 font-600">Areas</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero-bg relative overflow-hidden text-white">
+  <div class="pipe-grid pointer-events-none absolute inset-0"></div>
+  <div class="relative mx-auto grid max-w-content gap-12 px-5 pb-28 pt-16 md:pt-24 lg:grid-cols-12 lg:gap-8">
+
+    <div class="lg:col-span-7" data-reveal-stagger>
+      <!-- Signature: live on-call badge -->
+      <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 py-1.5 pl-2.5 pr-4 text-sm">
+        <span class="live-dot inline-block h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+        <span class="font-600 text-white/90">On call now · avg. arrival <span class="text-aqua-light">38 min</span> in Brisbane</span>
+      </div>
+
+      <p class="eyebrow mb-4 text-xs font-700 text-aqua">Licensed plumbers · 24/7 emergency</p>
+      <h1 class="font-display text-4xl font-900 leading-[1.04] sm:text-5xl lg:text-6xl">
+        Burst pipe?<br class="hidden sm:block" /> Blocked drain?<br />
+        <span class="underline-aqua">We're there fast.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+        Same-day plumbing across Brisbane with upfront fixed pricing — you know the cost before we start. No surprise bills, no mess left behind.
+      </p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="tel:+61731850420" class="inline-flex items-center justify-center gap-2 rounded-full bg-amber px-7 py-3.5 font-700 text-ink shadow-lift transition hover:bg-amber-600">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          Call (07) 3185 0420
+        </a>
+        <a href="#quote" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 font-700 text-white transition hover:bg-white/10">
+          Get a free quote
+        </a>
+      </div>
+
+      <!-- Trust strip -->
+      <ul class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
+        <li class="flex items-center gap-2"><svg viewBox="0 0 24 24" class="h-4 w-4 text-aqua" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Licensed &amp; insured</li>
+        <li class="flex items-center gap-2"><svg viewBox="0 0 24 24" class="h-4 w-4 text-amber" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>4.9 ★ · 120+ reviews</li>
+        <li class="flex items-center gap-2"><svg viewBox="0 0 24 24" class="h-4 w-4 text-aqua" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No call-out fee</li>
+        <li class="flex items-center gap-2"><svg viewBox="0 0 24 24" class="h-4 w-4 text-aqua" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Upfront fixed pricing</li>
+      </ul>
+    </div>
+
+    <!-- Hero quote card -->
+    <div class="lg:col-span-5" data-reveal style="transition-delay:.18s">
+      <div class="rounded-2xl border border-white/10 bg-white/[.06] p-6 backdrop-blur-sm shadow-card">
+        <p class="font-display text-sm font-700 text-aqua-light">Fast quote — 30 seconds</p>
+        <p class="mt-1 text-sm text-white/65">Tell us what's wrong. We'll text you back, usually within minutes.</p>
+        <form id="heroForm" class="mt-5 space-y-3" novalidate>
+          <input type="text" name="name" required placeholder="Your name" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+          <input type="tel" name="phone" required placeholder="Mobile number" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+          <select id="heroIssue" name="issue" required class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white focus:border-aqua">
+            <option value="" disabled selected>What's the problem?</option>
+            <option>Burst / leaking pipe</option>
+            <option>Blocked drain or toilet</option>
+            <option>No hot water</option>
+            <option>Tap / fixture repair</option>
+            <option>Gas fitting</option>
+            <option>Something else</option>
+          </select>
+          <input id="heroIssueOther" type="text" name="issueOther" placeholder="Tell us what's going on…" class="hidden w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+          <button type="submit" class="w-full rounded-xl bg-amber py-3.5 font-700 text-ink transition hover:bg-amber-600">Get my free quote</button>
+        </form>
+        <div id="heroSuccess" class="hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-5 text-center">
+          <div class="mx-auto mb-2 grid h-11 w-11 place-items-center rounded-full bg-emerald-400/20"><svg viewBox="0 0 24 24" class="h-6 w-6 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <p class="font-display font-800 text-white">Thanks — request received!</p>
+          <p class="mt-1 text-sm text-white/70">A RapidFlow plumber will text you back shortly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water wave divider -->
+  <svg class="block w-full text-paper" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 48c180-40 360-40 540-12s360 64 540 36 360-52 360-52v70H0Z"/></svg>
+</section>
+
+<!-- ============ STATS BAR ============ -->
+<section class="border-b border-line bg-paper">
+  <div class="mx-auto grid max-w-content grid-cols-2 gap-px px-5 py-2 text-center md:grid-cols-4" data-reveal-stagger>
+    <div class="px-3 py-5"><p class="font-display text-3xl font-900 text-navy">15+</p><p class="mt-1 text-sm text-slate">years on the tools</p></div>
+    <div class="px-3 py-5"><p class="font-display text-3xl font-900 text-navy">24/7</p><p class="mt-1 text-sm text-slate">emergency callouts</p></div>
+    <div class="px-3 py-5"><p class="font-display text-3xl font-900 text-navy">4.9★</p><p class="mt-1 text-sm text-slate">from 120+ locals</p></div>
+    <div class="px-3 py-5"><p class="font-display text-3xl font-900 text-navy">100%</p><p class="mt-1 text-sm text-slate">satisfaction or it's fixed</p></div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="mx-auto max-w-content px-5 py-20 md:py-24">
+  <div class="max-w-2xl" data-reveal>
+    <p class="eyebrow text-xs font-700 text-aqua">What we fix</p>
+    <h2 class="mt-3 font-display text-3xl font-900 text-ink sm:text-4xl">From a dripping tap to a full re-pipe</h2>
+    <p class="mt-4 text-lg text-slate">One licensed team for every plumbing job around the home — residential and small commercial across Brisbane.</p>
+  </div>
+
+  <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
+    <!-- card -->
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4-7-12-7-12S5 11 5 15a7 7 0 0 0 7 7Z"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Burst &amp; leaking pipes</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">Fast detection and repair before water damage spreads. We isolate, fix and pressure-test.</p>
+    </article>
+
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M9 7V4h6v3"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Blocked drains &amp; toilets</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">High-pressure jetting and CCTV camera inspection to clear the blockage and find the cause.</p>
+    </article>
+
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4 4 14h7l-1 6 10-10h-7l1-6Z"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Hot water systems</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">Repairs and same-day replacements — electric, gas and heat-pump. Back to hot showers fast.</p>
+    </article>
+
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Gas fitting</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">Licensed gas work — cooktops, hot water and leak checks, done safely and to code.</p>
+    </article>
+
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6l-5 5a4 4 0 0 0 6 6l5-5h6"/><path d="m14 8 2-2"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Taps &amp; fixtures</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">Leaking taps, running toilets, new mixers and fittings — small jobs done right the first time.</p>
+    </article>
+
+    <article class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <span class="grid h-12 w-12 place-items-center rounded-xl bg-aqua/10 text-aqua ring-1 ring-aqua/20"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
+      <h3 class="mt-4 font-display text-lg font-800">Bathroom renovations</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate">Full plumbing rough-in and fit-off for your bathroom or laundry reno, coordinated start to finish.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS (real sequence → numbered) ============ -->
+<section id="how" class="bg-navy text-white">
+  <div class="mx-auto max-w-content px-5 py-20 md:py-24">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow text-xs font-700 text-aqua-light">How it works</p>
+      <h2 class="mt-3 font-display text-3xl font-900 sm:text-4xl">Three steps, no surprises</h2>
+    </div>
+    <ol class="mt-12 grid gap-8 md:grid-cols-3" data-reveal-stagger>
+      <li class="relative">
+        <span class="font-display text-5xl font-900 text-white/15">01</span>
+        <h3 class="mt-2 font-display text-xl font-800">Call or request a quote</h3>
+        <p class="mt-2 text-white/70">Tell us what's going on. We'll book you in — often the same day.</p>
+      </li>
+      <li class="relative">
+        <span class="font-display text-5xl font-900 text-white/15">02</span>
+        <h3 class="mt-2 font-display text-xl font-800">We arrive &amp; quote upfront</h3>
+        <p class="mt-2 text-white/70">A licensed plumber inspects the job and gives you a fixed price before any work starts.</p>
+      </li>
+      <li class="relative">
+        <span class="font-display text-5xl font-900 text-white/15">03</span>
+        <h3 class="mt-2 font-display text-xl font-800">Fixed &amp; left spotless</h3>
+        <p class="mt-2 text-white/70">We finish the job, test it, clean up, and back it with our workmanship guarantee.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews" class="mx-auto max-w-content px-5 py-20 md:py-24">
+  <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
+    <div class="max-w-2xl">
+      <p class="eyebrow text-xs font-700 text-aqua">Reviews</p>
+      <h2 class="mt-3 font-display text-3xl font-900 text-ink sm:text-4xl">Brisbane locals rate us 4.9★</h2>
+    </div>
+    <div class="flex items-center gap-1 text-amber">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+    </div>
+  </div>
+
+  <div class="mt-10 grid gap-5 md:grid-cols-3" data-reveal-stagger>
+    <figure class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <div class="flex gap-0.5 text-amber" aria-label="5 out of 5 stars">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      </div>
+      <blockquote class="mt-4 text-ink/85">"Hot water died on a Sunday. RapidFlow had a new unit in by that afternoon and the price was exactly what they quoted. Lifesavers."</blockquote>
+      <figcaption class="mt-4 text-sm font-700 text-ink">Sarah M. <span class="font-500 text-slate">· Paddington</span></figcaption>
+    </figure>
+
+    <figure class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <div class="flex gap-0.5 text-amber" aria-label="5 out of 5 stars">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      </div>
+      <blockquote class="mt-4 text-ink/85">"Turned up on time, explained everything, and cleared a drain three other plumbers couldn't. No mess left behind."</blockquote>
+      <figcaption class="mt-4 text-sm font-700 text-ink">Daniel T. <span class="font-500 text-slate">· Carindale</span></figcaption>
+    </figure>
+
+    <figure class="lift rounded-2xl border border-line bg-white p-6 shadow-card">
+      <div class="flex gap-0.5 text-amber" aria-label="5 out of 5 stars">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg><svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2Z"/></svg>
+      </div>
+      <blockquote class="mt-4 text-ink/85">"Fixed price up front, friendly, and they texted when they were 10 minutes away. Exactly how it should be."</blockquote>
+      <figcaption class="mt-4 text-sm font-700 text-ink">Priya K. <span class="font-500 text-slate">· New Farm</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ AREAS ============ -->
+<section id="areas" class="border-y border-line bg-white">
+  <div class="mx-auto grid max-w-content gap-10 px-5 py-20 md:grid-cols-2 md:py-24" data-reveal-stagger>
+    <div>
+      <p class="eyebrow text-xs font-700 text-aqua">Service area</p>
+      <h2 class="mt-3 font-display text-3xl font-900 text-ink sm:text-4xl">Servicing Greater Brisbane</h2>
+      <p class="mt-4 text-lg text-slate">Same-day where we can, 7 days a week. If your suburb isn't listed, call us — chances are we cover it.</p>
+      <ul class="mt-6 grid grid-cols-2 gap-x-6 gap-y-2 text-sm font-600 text-ink/80 sm:grid-cols-3">
+        <li>· New Farm</li><li>· Paddington</li><li>· Carindale</li>
+        <li>· Chermside</li><li>· Indooroopilly</li><li>· Wynnum</li>
+        <li>· Mt Gravatt</li><li>· Ashgrove</li><li>· Sandgate</li>
+      </ul>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-line shadow-card">
+      <iframe
+        title="RapidFlow Plumbing service area — New Farm, Brisbane"
+        src="https://www.google.com/maps?q=New%20Farm%2C%20Brisbane%20QLD%2C%20Australia&z=11&output=embed"
+        class="block h-[280px] w-full md:h-full md:min-h-[340px]"
+        style="border:0;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE / LEAD FORM ============ -->
+<section id="quote" class="hero-bg relative overflow-hidden text-white">
+  <div class="pipe-grid pointer-events-none absolute inset-0"></div>
+  <div class="relative mx-auto grid max-w-content gap-10 px-5 py-20 md:grid-cols-2 md:py-24" data-reveal-stagger>
+    <div>
+      <p class="eyebrow text-xs font-700 text-aqua-light">Free quote</p>
+      <h2 class="mt-3 font-display text-3xl font-900 sm:text-4xl">Tell us what's wrong</h2>
+      <p class="mt-4 max-w-md text-lg text-white/75">Send a quick note and we'll text you straight back with availability and an upfront price.</p>
+      <div class="mt-8 space-y-4">
+        <a href="tel:+61731850420" class="flex items-center gap-3 font-600">
+          <span class="grid h-10 w-10 place-items-center rounded-full bg-amber text-ink"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+          (07) 3185 0420
+        </a>
+        <p class="flex items-center gap-3 text-white/75"><span class="grid h-10 w-10 place-items-center rounded-full bg-white/10"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Open 24/7 for emergencies</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-white/10 bg-white/[.06] p-6 backdrop-blur-sm shadow-card sm:p-8">
+      <form id="quoteForm" class="space-y-4" novalidate>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block text-sm">
+            <span class="mb-1.5 block font-600 text-white/80">Name</span>
+            <input type="text" name="name" required placeholder="Jane Citizen" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+          </label>
+          <label class="block text-sm">
+            <span class="mb-1.5 block font-600 text-white/80">Mobile</span>
+            <input type="tel" name="phone" required placeholder="0400 000 000" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+          </label>
+        </div>
+        <label class="block text-sm">
+          <span class="mb-1.5 block font-600 text-white/80">Suburb</span>
+          <input type="text" name="suburb" required placeholder="e.g. New Farm" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua" />
+        </label>
+        <label class="block text-sm">
+          <span class="mb-1.5 block font-600 text-white/80">What's the problem?</span>
+          <textarea name="problem" rows="3" required placeholder="Briefly describe what's going on…" class="w-full rounded-xl border border-white/10 bg-ink/40 px-4 py-3 text-white placeholder-white/40 focus:border-aqua"></textarea>
+        </label>
+        <button type="submit" class="w-full rounded-xl bg-amber py-3.5 font-700 text-ink transition hover:bg-amber-600">Get my free quote</button>
+        <p class="text-center text-xs text-white/45">No spam. We only use your details to get back to you about your job.</p>
+      </form>
+
+      <div id="quoteSuccess" class="hidden text-center">
+        <div class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-emerald-400/20"><svg viewBox="0 0 24 24" class="h-8 w-8 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <p class="font-display text-xl font-800">Request received!</p>
+        <p class="mt-2 text-white/75">Thanks — a RapidFlow plumber will text you back shortly with availability and a price.</p>
+        <p class="mt-5 inline-block rounded-lg border border-dashed border-aqua/40 bg-aqua/5 px-3 py-2 text-xs text-aqua-light">Demo note: in the live site this instantly texts &amp; emails the business owner the lead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-white/70">
+  <div class="mx-auto grid max-w-content gap-10 px-5 py-14 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2.5 text-white">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-aqua/15 ring-1 ring-aqua/30"><svg viewBox="0 0 24 24" class="h-5 w-5 text-aqua" fill="currentColor"><path d="M12 2.2S5 9.6 5 14.4a7 7 0 0 0 14 0C19 9.6 12 2.2 12 2.2Z"/></svg></span>
+        <span class="font-display text-lg font-800">RapidFlow<span class="text-aqua">.</span></span>
+      </div>
+      <p class="mt-4 max-w-sm text-sm">Licensed Brisbane plumbers for emergencies, repairs, hot water and renovations. Upfront pricing, 7 days a week.</p>
+      <p class="mt-4 text-xs text-white/40">QBCC Lic. 15234876 · ABN 00 000 000 000</p>
+    </div>
+    <div>
+      <p class="font-display text-sm font-800 text-white">Services</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="#services" class="transition hover:text-aqua-light">Burst &amp; leaking pipes</a></li>
+        <li><a href="#services" class="transition hover:text-aqua-light">Blocked drains</a></li>
+        <li><a href="#services" class="transition hover:text-aqua-light">Hot water systems</a></li>
+        <li><a href="#services" class="transition hover:text-aqua-light">Gas fitting</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-display text-sm font-800 text-white">Get in touch</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="tel:+61731850420" class="transition hover:text-aqua-light">(07) 3185 0420</a></li>
+        <li><a href="mailto:hello@rapidflowplumbing.com.au" class="transition hover:text-aqua-light">hello@rapidflowplumbing.com.au</a></li>
+        <li>Open 24/7 for emergencies</li>
+        <li>Based in New Farm, Brisbane</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-2 px-5 py-5 text-xs text-white/40 sm:flex-row">
+      <p>© <span id="year"></span> RapidFlow Plumbing. All rights reserved.</p>
+      <p>Demo site · template by your web partner</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<!-- ============ MOBILE STICKY CALL BAR ============ -->
+<div class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white/95 p-2.5 backdrop-blur md:hidden">
+  <a href="tel:+61731850420" class="inline-flex items-center justify-center gap-2 rounded-xl bg-amber py-3 font-700 text-ink">
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+    Call now
+  </a>
+  <a href="#quote" class="inline-flex items-center justify-center gap-2 rounded-xl bg-navy py-3 font-700 text-white">Free quote</a>
+</div>
+
+<script>
+  // Current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Progressive disclosure — reveal elements as they enter the viewport.
+  // Adapted from Patterns/js/scroll-reveal.js. Honours prefers-reduced-motion.
+  (() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
+    if (!targets.length) return;
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(el => io.observe(el));
+  })();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    })
+  );
+
+  // Mocked form submissions — swap for a real endpoint (Formspree / GoHighLevel webhook) in production
+  function wireForm(formId, successId) {
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+  // Reveal a free-text field when "Something else" is chosen in the hero quote form
+  (() => {
+    const sel = document.getElementById('heroIssue');
+    const other = document.getElementById('heroIssueOther');
+    if (!sel || !other) return;
+    sel.addEventListener('change', () => {
+      const show = sel.value === 'Something else';
+      other.classList.toggle('hidden', !show);
+      other.required = show;
+      if (show) { other.focus(); } else { other.value = ''; }
+    });
+  })();
+
+  wireForm('heroForm', 'heroSuccess');
+  wireForm('quoteForm', 'quoteSuccess');
+</script>
+</body>
+</html>
